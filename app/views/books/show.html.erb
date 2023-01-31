@@ -16,10 +16,38 @@
 </p>
 
 <p>
-   <% if @book.image.attached? %>
-     <%= image_tag @book.image %>
-   <% end %>
- </p>
+  <% if @book.image.attached? %>
+    <%= image_tag @book.image %>
+  <% end %>
+</p>
+
+<h2>Review Form</h2>
+<%= form_with(model: @book_review, local: true) do |form| %>
+  <% if @book_review.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@book_review.errors.count, "error") %> prohibited this book_review from being saved:</h2>
+
+      <ul>
+        <% @book_review.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :review %>
+    <%= form.text_area :review %>
+  </div>
+
+  <%= form.hidden_field :user_id, :value => current_user.id%>
+  <%= form.hidden_field :book_id, :value => @book.id%>
+
+  <div class="actions">
+    <%= form.submit "Create book review" %>
+  </div>
+
+<% end %>
 
 <%= link_to 'Edit', edit_book_path(@book) %> |
 <%= link_to 'Back', books_path %>
