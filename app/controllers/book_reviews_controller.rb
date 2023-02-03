@@ -8,6 +8,7 @@ class BookReviewsController < ApplicationController
 
   # GET /book_reviews/1 or /book_reviews/1.json
   def show
+    redirect_to "/books/#{@book_review.book_id}"
   end
 
   # GET /book_reviews/new
