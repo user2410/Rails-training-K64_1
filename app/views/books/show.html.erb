@@ -52,7 +52,7 @@
 Review List
 <ul>
   <% @book.book_reviews.each do |review| %>
-    <li><%="#{review.review} (#{review.user_id})"%></li>
+    <li><%="#{review.review} (#{review.user.name})"%></li>
   <% end %>
 </ul>
 
